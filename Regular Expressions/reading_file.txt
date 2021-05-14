@@ -1,0 +1,21 @@
+line0
+
+==>accepted
+127.0.0.1           test01.     127.0.0.1
+
+    192.168.1.1 sdg qqqqqqf4dg1dd.
+192.168.1.255 sdg6h20df@s0g50a54hg1dg.dfs4dg1dd.
+255.255.255.255
+0.0.0.0  accepted
+
+linessss
+
+==>rejected
+1.1.1.01        # This is an invalid IP address! 
+1.1.1.0Z        # This is an invalid IP address! 
+30168.1.255 
+127.1 
+192.168.1.256
+-1.2.3.4
+1.1.1.999
+3.3
