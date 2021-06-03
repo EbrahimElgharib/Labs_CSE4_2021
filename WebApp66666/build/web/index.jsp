@@ -200,7 +200,6 @@
                 }
 
                 // languages
-// sites
                 public int insertLanguages(String firstL, String secondL, String thirdL, int id) {
                     int res1ult_sites = 0;
 
@@ -470,7 +469,8 @@
         <!--
        function displayResults() {
             if (document.myForm.hidden.value == 1) {
-                alert("Thanks for inserting your Data");
+                // alert("Thanks for inserting your Data");
+                location.replace("/WebApp66666/aggregate.jsp")
             }
 
 
