@@ -43,14 +43,15 @@
                 }
 
                 // languages
-                public int counts() {
+                public int counts(String query) {
                     int counts = 0;
                     Statement st= null;
                     ResultSet rs= null;
                     try {
                         // our SQL SELECT query. 
                         // if you only need a few columns, specify them by name instead of using "*"
-                        String query = "SELECT COUNT(*) FROM person WHERE country='Egypt'";
+                        // String query = "SELECT COUNT(*) FROM person WHERE country='Egypt'";
+                        //String query = "SELECT COUNT(*) FROM person WHERE fName='ebrahim'";
 
                         // create the java statement
                         st = connection.createStatement();
@@ -76,12 +77,32 @@
         
         <%!
             CV person = new CV();
-            int x = person.counts();
+            String query_egypt = "SELECT COUNT(*) FROM person WHERE country='Egypt'";
+            String query_ebrahim = "SELECT COUNT(*) FROM person WHERE fName='ebrahim'";
+            int egypt = person.counts(query_egypt);
+            int ebrahim = person.counts(query_ebrahim);
+            
+            
             %>
         
         
+       
         
-        <h1 id="nav"><%= x %></h1>
+        <table border="0">
+
+                <tbody>
+                    <tr>
+                        <td>Person.Country['Egypt']:</td>
+                        <td><input class ="tb" type="text" value="<%= egypt %>" /></td>
+                    </tr>
+                    <tr>
+                        <td>First Name = 'ebrahim':</td>
+                        <td><input class ="tb" type="text" value="<%= ebrahim %>" /></td>
+                    </tr>
+                    
+
+                </tbody>
+            </table>
        
         
         
