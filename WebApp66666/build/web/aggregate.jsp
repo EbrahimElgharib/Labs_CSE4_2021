@@ -24,18 +24,17 @@
                 String PASSWORD = "root";
                 int person_id = 0;
                 Connection connection = null;
-                PreparedStatement insertPerson = null;
-                PreparedStatement courses = null;
-                PreparedStatement projects = null;
-                ResultSet resultSet = null;
+                //PreparedStatement insertPerson = null;
+                //PreparedStatement courses = null;
+                //PreparedStatement projects = null;
                 ResultSet rs = null;
-                ResultSet rss = null;
+                Statement st = null;
 
                 public CV() {
-                    
 
                     try {
                         connection = DriverManager.getConnection(URL, USER, PASSWORD);
+                        connection.setAutoCommit(false);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
 
@@ -45,8 +44,6 @@
                 // languages
                 public int counts(String query) {
                     int counts = 0;
-                    Statement st= null;
-                    ResultSet rs= null;
                     try {
                         // our SQL SELECT query. 
                         // if you only need a few columns, specify them by name instead of using "*"
@@ -60,51 +57,66 @@
                         rs = st.executeQuery(query);
 
                         rs.next();
-                        counts = rs.getInt(1); 
-                        st.close();
-                        rs.close();
+                        counts = rs.getInt(1);
 
                     } catch (SQLException ex) {
 
                         ex.printStackTrace();
                     }
+                    System.out.println("AT THE END");
 
                     return counts;
+                }
+
+                public void close()
+                    {
+                        try{
+                            if(st != null)
+                                st.close();
+                            if(rs != null)
+                                rs.close();
+                            if(connection != null)
+                                connection.close();
+                        }
+                        catch(Exception e){
+                            e.printStackTrace();
+
+                            System.out.println(e);
+                        }
                     }
-}
+            }
 
         %>
-        
-        <%!
+
+        <%!            
             CV person = new CV();
             String query_egypt = "SELECT COUNT(*) FROM person WHERE country='Egypt'";
             String query_ebrahim = "SELECT COUNT(*) FROM person WHERE fName='ebrahim'";
             int egypt = person.counts(query_egypt);
             int ebrahim = person.counts(query_ebrahim);
-            
-            
-            %>
-        
-        
-       
-        
+
+        %>
+
+
+
+
         <table border="0">
 
-                <tbody>
-                    <tr>
-                        <td>Person.Country['Egypt']:</td>
-                        <td><input class ="tb" type="text" value="<%= egypt %>" /></td>
-                    </tr>
-                    <tr>
-                        <td>First Name = 'ebrahim':</td>
-                        <td><input class ="tb" type="text" value="<%= ebrahim %>" /></td>
-                    </tr>
-                    
+            <tbody>
+                <tr>
+                    <td>Person.Country['Egypt']:</td>
+                    <td><input class ="tb" type="text" value="<%= egypt %>" /></td>
+                </tr>
+                <tr>
+                    <td>First Name = ['ebrahim']:</td>
+                    <td><input class ="tb" type="text" value="<%= ebrahim %>" /></td>
+                </tr>
 
-                </tbody>
-            </table>
-       
-        
-        
+
+            </tbody>
+        </table>
+
+
+
     </body>
 </html>
